@@ -15,9 +15,9 @@ var users = [];
 var me;
 io.on('connection', function (socket) {
   
-    socket.on('onLogin', (userNew) => {
-      user = userNew;
+    socket.on('onLogin', (userID) => {
       user.socket = socket.id; 
+      user.id = userID; 
       users.push(user); 
       var me = users
       io.sockets.emit('newuser',users)
@@ -26,10 +26,9 @@ io.on('connection', function (socket) {
 
     socket.on('onWhriting', (user_to) => {
       for (var i = users.length - 1; i >= 0; i--) {
-        if(users[i].user.id == user_to.id){
-          user.socket = socket.id; 
-          users[socket.id] = user; 
+        if(users[i].id == user_to){
           io.to(user[i].socket).emit('ImOnWhriting');
+          break
         }
       }
 
@@ -37,11 +36,8 @@ io.on('connection', function (socket) {
 
     socket.on('onSendMessage', (user_to,message) => {
       for (var i = users.length - 1; i >= 0; i--) {
-        if(users[i].id == user_to.id){
-          user.socket = socket.id; 
-          users[socket.id] = user; 
+        if(users[i].id == user_to){
           io.to(user[i].socket).emit('IHaveSendMessage',({body:message}));
-//           io.sockets.emit('IHaveSendMessage',({body:message}))
           break
         }
       }
