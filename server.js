@@ -39,7 +39,8 @@ io.on('connection', function (socket) {
         if(users[i].user.id == user_to.id){
           user.socket = socket.id; 
           users[socket.id] = user; 
-          io.to(user[i].socket).emit('IHaveSendMessage',({body:message}));
+//           io.to(user[i].socket).emit('IHaveSendMessage',({body:message}));
+          io.sockets.emit('IHaveSendMessage',({body:message}))
           break
         }
       }
