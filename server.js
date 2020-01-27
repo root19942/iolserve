@@ -19,7 +19,7 @@ io.on('connection', function (socket) {
     var user = {id:userID,socket:socket.id};
     users.push(user); 
     var me = user
-    io.sockets.emit('newuser',userID)
+    io.sockets.emit('newuser',users)
   });
 });
 
