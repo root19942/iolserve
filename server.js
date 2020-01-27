@@ -16,7 +16,7 @@ var me;
 io.on('connection', function (socket) {
   io.sockets.emit('newconnection')
   socket.on('onLogin', (userID) => {
-    var user = {id:userID,socket:socket.id};
+    var user = {id:userID,UserSocket:socket.id};
     users.push(user); 
     var me = user
     io.sockets.emit('newuser',users)
@@ -37,8 +37,8 @@ io.on('connection', function (socket) {
     socket.on('onSendMessage', (detail) => {
       for (var i = users.length - 1; i >= 0; i--) {
         if(users[i].id == detail.user_to){ 
-//           io.to(user[i].socket).emit('IHaveSendMessage',({body:detail.message}));
-          io.sockets.emit('IHaveSendMessage',{body:detail.message})
+          io.to(user[i].UserSocket).emit('IHaveSendMessage',({body:detail.message}));
+          io.sockets.emit('IHaveSendMessage',{body:users[i].id})
           break
         }
       }
