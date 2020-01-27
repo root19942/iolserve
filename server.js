@@ -34,10 +34,10 @@ io.on('connection', function (socket) {
 
     });
 
-    socket.on('onSendMessage', (user_to,message) => {
+    socket.on('onSendMessage', (detail) => {
       for (var i = users.length - 1; i >= 0; i--) {
-        if(users[i].id == user_to){ 
-          io.to(user[i].socket).emit('IHaveSendMessage',({body:message}));
+        if(users[i].id == detail.user_to){ 
+          io.to(user[i].socket).emit('IHaveSendMessage',({body:detail.message}));
           break
         }
       }
