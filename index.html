@@ -11,11 +11,8 @@
       });
       
       
-       socket.on('IHaveSendMessage', (message) => {
-        liste = document.getElementById('operation_liste');
-           var li = document.createElement("li");
-            li.appendChild(document.createTextNode(message));
-             liste.appendChild(li);
+       socket.on('newuser', (users) => {
+        console.log(users)
       });
     </script>
   </head>
