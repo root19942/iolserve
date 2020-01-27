@@ -16,12 +16,12 @@ var me;
 io.on('connection', function (socket) {
   io.sockets.emit('newconnection')
   socket.on('onLogin', (userID) => {
-    var user;
-    user.socket = socket.id; 
-    user.id = userID; 
-    users.push(user); 
-    var me = user
-    io.sockets.emit('newuser',users)
+//     var user;
+//     user.socket = socket.id; 
+//     user.id = userID; 
+//     users.push(user); 
+//     var me = user
+    io.sockets.emit('newuser',userID)
   });
 });
 
