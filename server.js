@@ -21,24 +21,13 @@ io.on('connection', function (socket) {
     var me = user
     io.sockets.emit('newuser',users)
   });
-  
-    socket.on('onWhriting', (user_to) => {
-      for (var i = users.length - 1; i >= 0; i--) {
-        if(users[i].user.id == user_to.id){
-          user.socket = socket.id; 
-          users[socket.id] = user; 
-          io.to(user[i].socket).emit('ImOnWhriting');
-          break
-        }
-      }
-
-    });
 
     socket.on('onSendMessage', (detail) => {
       for (var i = users.length - 1; i >= 0; i--) {
         if(users[i].id == detail.user_to){ 
-          io.to(user[i].UserSocket).emit('IHaveSendMessage',({body:detail.message}));
-          io.sockets.emit('IHaveSendMessage',{body:users[i].id})
+          var socketId = users[i].UserSocket
+          io.to(`${socketId}`).emit('IHaveSendMessage',detail.message);
+//           io.sockets.emit('IHaveSendMessage',{body:users[i].id})
           break
         }
       }
