@@ -10,7 +10,9 @@
         el.innerHTML = 'Server time: ' + timeString;
       });
       
-      
+      socket.on('newconnection',()=>{
+        console.log('ca marce ici')
+      })
        socket.on('newuser', (users) => {
         console.log(users)
       });
