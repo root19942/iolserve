@@ -16,10 +16,11 @@ var me;
 io.on('connection', function (socket) {
   
     socket.on('onLogin', (userID) => {
+      var user;
       user.socket = socket.id; 
       user.id = userID; 
       users.push(user); 
-      var me = users
+      var me = user
       io.sockets.emit('newuser',users)
     });
 
