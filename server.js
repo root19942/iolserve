@@ -1,16 +1,13 @@
-'use strict';
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-const express = require('express');
-const socketIO = require('socket.io');
+server.listen(80);
+// WARNING: app.listen(80) will NOT work here!
 
-const PORT = process.env.PORT || 3000;
-const INDEX = '/index.html';
-
-const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
-
-const io = socketIO(server);
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
 
 io.on('connection', function (socket) {
     socket.on('onLogin', (user) => {
@@ -49,7 +46,3 @@ io.on('connection', function (socket) {
         io.sockets.emit('userDisconnected',users)
     });
 });
-
-
-
-setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
