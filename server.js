@@ -29,7 +29,6 @@ io.on('connection', function (socket) {
           user.socket = socket.id; 
           users[socket.id] = user; 
           io.to(user[i].socket).emit('ImOnWhriting');
-          break
         }
       }
 
