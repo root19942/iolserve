@@ -9,9 +9,21 @@
         el = document.getElementById('server-time');
         el.innerHTML = 'Server time: ' + timeString;
       });
+      
+      
+       socket.on('IHaveSendMessage', (message) => {
+        liste = document.getElementById('operation_liste');
+           var li = document.createElement("li");
+            li.appendChild(document.createTextNode(message));
+             liste.appendChild(li);
+      });
     </script>
   </head>
   <body>
     <p id="server-time"></p>
+    <br>
+    <h1>Liste des operation</h1>
+    <ul id='operation_liste'>
+    </ul>
   </body>
 </html>
