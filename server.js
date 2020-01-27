@@ -14,10 +14,10 @@ const io = socketIO(server);
 var users = {};
 var me;
 io.on('connection', function (socket) {
-  io.sockets.emit('IHaveSendMessage',({body:'Teste'}))
+  
     socket.on('onLogin', (user) => {
       user.socket = socket.id; 
-      users[socket.id] = user; 
+      users.push(user); 
       var me = users
       io.sockets.emit('newuser',users)
     });
@@ -37,11 +37,11 @@ io.on('connection', function (socket) {
 
     socket.on('onSendMessage', (user_to,message) => {
       for (var i = users.length - 1; i >= 0; i--) {
-        if(users[i].user.id == user_to.id){
+        if(users[i].id == user_to.id){
           user.socket = socket.id; 
           users[socket.id] = user; 
-//           io.to(user[i].socket).emit('IHaveSendMessage',({body:message}));
-          io.sockets.emit('IHaveSendMessage',({body:message}))
+          io.to(user[i].socket).emit('IHaveSendMessage',({body:message}));
+//           io.sockets.emit('IHaveSendMessage',({body:message}))
           break
         }
       }
