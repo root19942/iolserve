@@ -27,11 +27,19 @@ io.on('connection', function (socket) {
         if(users[i].id == detail.user_to){ 
           var socketId = users[i].UserSocket
           io.to(`${socketId}`).emit('IHaveSendMessage',detail.message);
-//           io.sockets.emit('IHaveSendMessage',{body:users[i].id})
           break
         }
       }
-
+    });
+  
+      socket.on('Imwhriting', (detail) => {
+      for (var i = users.length - 1; i >= 0; i--) {
+        if(users[i].id == detail.user_to){ 
+          var socketId = users[i].UserSocket
+          io.to(`${socketId}`).emit('PrepareYou');
+          break
+        }
+      }
     });
 
     socket.on('disconnect', () => {
