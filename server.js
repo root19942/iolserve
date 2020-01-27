@@ -15,7 +15,8 @@ var users = [];
 var me;
 io.on('connection', function (socket) {
   
-    socket.on('onLogin', (user) => {
+    socket.on('onLogin', (userNew) => {
+      user = userNew;
       user.socket = socket.id; 
       users.push(user); 
       var me = users
