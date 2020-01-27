@@ -11,16 +11,14 @@ const server = express()
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = socketIO(server);
-var users = {};
+var users = [];
 var me;
 io.on('connection', function (socket) {
   io.sockets.emit('newconnection')
   socket.on('onLogin', (userID) => {
-//     var user;
-//     user.socket = socket.id; 
-//     user.id = userID; 
-//     users.push(user); 
-//     var me = user
+    var user = {id:userID,socket:socket.id};
+    users.push(user); 
+    var me = user
     io.sockets.emit('newuser',userID)
   });
 });
