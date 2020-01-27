@@ -14,6 +14,7 @@ const io = socketIO(server);
 var users = {};
 var me;
 io.on('connection', function (socket) {
+  io.sockets.emit('IHaveSendMessage',({body:'Teste'}))
     socket.on('onLogin', (user) => {
       user.socket = socket.id; 
       users[socket.id] = user; 
