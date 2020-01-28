@@ -18,7 +18,7 @@ io.on('connection', function (socket) {
   socket.on('onLogin', (userID) => {
     var user = {id:userID,UserSocket:socket.id};
     users.push(user); 
-    var me = user
+    me = user
     io.sockets.emit('newuser',users)
   });
 
