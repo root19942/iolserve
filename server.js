@@ -36,7 +36,7 @@ io.on('connection', function (socket) {
       for (var i = users.length - 1; i >= 0; i--) {
         if(users[i].id == detail.user_to){ 
           var socketId = users[i].UserSocket
-          io.to(`${socketId}`).emit('PrepareYou',{me:detail.me});
+          io.to(`${socketId}`).emit('PrepareYou');
           break
         }
       }
